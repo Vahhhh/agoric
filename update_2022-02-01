@@ -1,0 +1,17 @@
+# clone only if you haven't already
+git clone https://github.com/Agoric/ag0.git
+cd ag0
+
+sudo systemctl stop agd
+
+# pull code needed for upgrade
+git pull origin
+git checkout agoric-upgrade-5
+make install
+make build
+ag0 version
+# HEAD-a2a0dc089ca98b9eae50802d8ed866bf8c209b06
+systemctl restart agd.service
+# check logs
+journalctl -u ag0.service -f -n 100
+
